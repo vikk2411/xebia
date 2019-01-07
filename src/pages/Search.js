@@ -9,7 +9,7 @@ let currentValue;
 
 function fetch(value, callback) {
 
-  axios.get("http://swapi.co/api/planets?search="+value, { headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': '*'} } )
+  axios.get("https://swapi.co/api/planets?search="+value, { headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': '*'} } )
   .then((res) => {
     console.log("res", res)
     let data = []
