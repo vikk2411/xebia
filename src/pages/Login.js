@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import Header from "../partials/Header"
 
-const loginPage = () => {
+const Login = () => {
   return(
-    <div style={{marginTop: '20px'}}>
-      this is login page
+    <div>
+      <Header />
+      <span>this is login page</span>
     </div>
   )
 }
 
-export default loginPage;
+export default Login;

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import Header from "../partials/Header"
 
-const searchPage = () => {
+const Search = () => {
   return(
     <div>
-      this is search page
+      <Header />
+      <span>this is search page</span>
     </div>
   )
 }
 
-export default searchPage;
+export default Search;
