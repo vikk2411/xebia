@@ -3,6 +3,7 @@ import { Select } from 'antd';
 import 'antd/dist/antd.css';
 import Header from "../partials/Header"
 import axios from "axios"
+import "./Search.css"
 
 const Option = Select.Option;
 let currentValue;
@@ -48,6 +49,7 @@ class Search extends React.Component {
         data.push({
           value: r.name,
           text: r.name,
+          population: r.population || 0
         });
       });
 
@@ -70,15 +72,17 @@ class Search extends React.Component {
   }
 
   render() {
-    const options = this.state.data.map(d => <Option key={d.value}>{d.text}</Option>);
+    const options = this.state.data.map(d => <Option style={{fontSize: ((d.population || 0)/1000000000 + 8)}} key={d.value}>{d.text}</Option>);
     return (
       <div>
         <Header />
+
+        Search: {` `}
         <Select
           showSearch
+          className='search'
           value={this.state.value}
           placeholder={this.props.placeholder}
-          style={{width: '200px', height: '50px'}}
           defaultActiveFirstOption={false}
           showArrow={false}
           filterOption={false}
