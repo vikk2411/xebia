@@ -25,5 +25,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://swapi.co"
+  "proxy": "https://swapi.co"
 }

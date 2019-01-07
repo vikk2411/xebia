@@ -37,10 +37,32 @@ class Search extends React.Component {
     fetching: false
   }
 
+  fetch(value, callback) {
+
+    axios.get("https://swapi.co/api/planets?search="+value, { headers: {'Content-Type': 'application/json'} } )
+    .then((res) => {
+      console.log("res", res)
+      let data = []
+
+      res.data.results.forEach((r) => {
+        data.push({
+          value: r.name,
+          text: r.name,
+        });
+      });
+
+      callback(data);
+    })
+    .catch((err) => {
+      console.log("err", err)
+    })
+
+  }
+
   handleSearch = (value) => {
     this.setState({fetching: true})
     const callback = data => this.setState({ data, fetching: false })
-    fetch(value, callback);
+    this.fetch(value, callback);
   }
 
   handleChange = (value) => {
