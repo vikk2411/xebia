@@ -18,7 +18,7 @@ class Search extends React.Component {
 
   componentDidMount(){
     this.timer = setTimeout(() => {
-
+      this.setState({searchCount: 0})
     }, 60000)
   }
 
@@ -59,7 +59,18 @@ class Search extends React.Component {
   handleChange = (value) => {
     console.log("calling onChange", value, this.state)
     const planet = this.state.data && this.state.data.filter((d) => d.name == value)[0]
-    this.setState({ value, planet });
+    if(this.state.searchCount >= 15 && (localStorage.getItem('userName') != "Luke Skywalker") ){
+      // do not allow the user to see details
+    }else{
+      this.setState((prevState) => {
+        return {
+          value,
+          planet,
+          searchCount: (prevState.searchCount + 1)
+        }
+       })
+    }
+
   }
 
   render() {
