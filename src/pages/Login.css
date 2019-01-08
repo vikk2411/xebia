@@ -1,0 +1,21 @@
+.loginInput{
+  width:300px;
+  margin-top: 10px;
+}
+
+.inputDiv{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  /*justify-content: center;*/
+  align-items: center;
+}
+
+.loginText{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.submit{
+  margin-top: 10px
+}

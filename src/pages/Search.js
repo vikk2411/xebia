@@ -6,30 +6,6 @@ import axios from "axios"
 import "./Search.css"
 
 const Option = Select.Option;
-let currentValue;
-
-function fetch(value, callback) {
-
-  axios.get("https://swapi.co/api/planets?search="+value, { headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': '*'} } )
-  .then((res) => {
-    console.log("res", res)
-    let data = []
-
-    // result.forEach((r) => {
-    //   data.push({
-    //     value: r[0],
-    //     text: r[0],
-    //   });
-    // });
-
-    callback(data);
-  })
-  .catch((err) => {
-    console.log("err", err)
-  })
-
-}
-
 
 class Search extends React.Component {
   state = {

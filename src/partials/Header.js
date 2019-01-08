@@ -3,11 +3,23 @@ import { Link } from 'react-router-dom'
 import './Header.css';
 
 const Header = () => {
+  const handleLogout = () => {
+    localStorage.setItem('userName', '')
+    localStorage.setItem('userUrl', '')
+  }
+
   return(
     <div className="App-header">
-      <Link className="link" to="/">Sign In</Link>
-      <Link className="link" to="/search">Search</Link>
-      <Link className="link" to="/Logout">Logout</Link>
+      {
+        !localStorage.getItem('userName') && <Link className="link" to="/">Sign In</Link>
+      }
+      {
+        localStorage.getItem('userName') && <Link className="link" to="/search">Search</Link>
+      }
+      {
+        localStorage.getItem('userName') && <Link className="link" to='/' onClick={handleLogout}>Logout</Link>
+      }
+
     </div>
   )
 }
