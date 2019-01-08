@@ -11,9 +11,20 @@ class Search extends React.Component {
   state = {
     data: [],
     value: undefined,
-    fetching: false
+    fetching: false,
+    searchCount: 0,
+    planet: null
   }
 
+  componentDidMount(){
+    this.timer = setTimeout(() => {
+
+    }, 60000)
+  }
+
+  componentWillUnmount(){
+    clearTimeout(this.timer)
+  }
 
 
   fetch(value, callback) {
@@ -26,8 +37,8 @@ class Search extends React.Component {
       res.data.results.forEach((r) => {
         data.push({
           value: r.name,
-          text: r.name,
-          population: r.population || 0
+          population: r.population || 0,
+          ...r
         });
       });
 
@@ -46,18 +57,22 @@ class Search extends React.Component {
   }
 
   handleChange = (value) => {
-    this.setState({ value });
+    console.log("calling onChange", value, this.state)
+    const planet = this.state.data && this.state.data.filter((d) => d.name == value)[0]
+    this.setState({ value, planet });
   }
 
   render() {
+    const {planet} = this.state
+
     const options = this.state.data.map(d => {
       let fontSize = (parseInt(d.population) || 0)/1000000000 + 8
       if(fontSize > 30){
-        fontSize = 30
+        fontSize = 30  // to prevent unusually large sizes
       }
-
-      return (<Option style={{fontSize}} key={d.value}>{d.text}</Option>)
+      return (<Option style={{fontSize}} key={d.value}>{d.name}</Option>)
     });
+
     return (
       <div>
         <Header />
@@ -79,6 +94,19 @@ class Search extends React.Component {
         </Select>
         {
           this.state.fetching && "Fetching..."
+        }
+
+        {
+          planet &&
+          <div className='planetDetails'>
+            <div className="row"><span className='col'>Name:</span> <span className='col'>{planet.name}</span></div><br/>
+            <div className="row"><span className='col'>Diameter:</span> <span className='col'>{planet.diameter}</span></div><br/>
+            <div className="row"><span className='col'>Gravity:</span> <span className='col'>{planet.gravity}</span></div><br/>
+            <div className="row"><span className='col'>Orbital Period:</span> <span className='col'>{planet.orbital_period}</span></div><br/>
+            <div className="row"><span className='col'>Rotation Period:</span> <span className='col'>{planet.rotation_period}</span></div><br/>
+            <div className="row"><span className='col'>Surface Water:</span> <span className='col'>{planet.surface_water}</span></div><br/>
+            <div className="row"><span className='col'>Population:</span> <span className='col'>{planet.population}</span></div><br/>
+          </div>
         }
       </div>
     );
