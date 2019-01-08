@@ -14,6 +14,8 @@ class Search extends React.Component {
     fetching: false
   }
 
+
+
   fetch(value, callback) {
 
     axios.get("https://swapi.co/api/planets?search="+value, { headers: {'Content-Type': 'application/json'} } )
@@ -48,7 +50,14 @@ class Search extends React.Component {
   }
 
   render() {
-    const options = this.state.data.map(d => <Option style={{fontSize: ((d.population || 0)/1000000000 + 8)}} key={d.value}>{d.text}</Option>);
+    const options = this.state.data.map(d => {
+      let fontSize = (parseInt(d.population) || 0)/1000000000 + 8
+      if(fontSize > 30){
+        fontSize = 30
+      }
+
+      return (<Option style={{fontSize}} key={d.value}>{d.text}</Option>)
+    });
     return (
       <div>
         <Header />
